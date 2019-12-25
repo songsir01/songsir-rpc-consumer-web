@@ -1,4 +1,4 @@
-package com.songsir.rpc.consumer;
+package com.songsir;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

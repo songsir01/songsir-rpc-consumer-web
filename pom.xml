@@ -17,6 +17,10 @@
     <dependencies>
         <dependency>
             <groupId>com.songsir.rpc</groupId>
+            <artifactId>songsir-rpc-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.songsir.rpc</groupId>
             <artifactId>songsir-rpc-consumer-service</artifactId>
         </dependency>
         <dependency>
