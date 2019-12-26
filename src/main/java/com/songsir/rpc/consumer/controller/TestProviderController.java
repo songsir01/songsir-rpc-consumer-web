@@ -1,6 +1,8 @@
 package com.songsir.rpc.consumer.controller;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.songsir.rpc.consumer.service.TestConsumerService;
+import com.songsir.rpc.provider.service.TestProviderService;
 import com.songsir.rpc.utils.MyRedisTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,13 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestProviderController {
 
     @Autowired
-    private TestConsumerService testConsumerService;
-    @Autowired
     private MyRedisTemplate redisTemplate;
+
+    @Reference(version = "1.0.0", check = false)
+    private TestProviderService testProviderService;
 
     @RequestMapping("testConsumer")
     public String testConsumer() {
-        return testConsumerService.getHelloWorld("");
+        return testProviderService.getHelloWorld("");
     }
 
     @RequestMapping("testRedis")
