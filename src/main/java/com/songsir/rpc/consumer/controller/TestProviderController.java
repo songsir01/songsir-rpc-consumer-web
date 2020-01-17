@@ -3,6 +3,7 @@ package com.songsir.rpc.consumer.controller;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.songsir.rpc.bean.User;
 import com.songsir.rpc.provider.service.TestProviderService;
+import com.songsir.rpc.utils.HttpUtil;
 import com.songsir.rpc.utils.MyRedisTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +44,19 @@ public class TestProviderController {
         Object songsir = redisTemplate.get("songsir");
         System.out.println(songsir);
         return "success";
+    }
+
+    @RequestMapping("/testHttpLinkOrRpc")
+    public String testHttpLinkOrRpc() {
+        long l = System.currentTimeMillis();
+        String str = testProviderService.testUseHttpOrRpc();
+        System.out.println(str);
+        System.err.println("use rpc time = " + (System.currentTimeMillis() - l));
+        long l1 = System.currentTimeMillis();
+        String str2 = HttpUtil.sendGet("http://localhost:8090/useHttpLinkTest", "");
+        System.out.println(str2);
+        System.err.println("use http time = " + (System.currentTimeMillis() - l1));
+        return "hello world!";
     }
 
 }
